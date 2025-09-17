@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-using ImageProcessing1.ImageProcessors.Exceptions;
+using BasicImageProcessing.ImageProcessingServices.Exceptions;
 
-namespace ImageProcessing1.ImageProcessors;
+namespace BasicImageProcessing.ImageProcessingServices;
 
 internal class HistogramImageProcessingService : IImageProcessingService
 {

@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing1.ImageProcessors.Exceptions;
+﻿namespace BasicImageProcessing.ImageProcessingServices.Exceptions;
 
 internal class NullImageException : Exception
 {

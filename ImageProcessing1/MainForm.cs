@@ -1,7 +1,7 @@
-using ImageProcessing1.ImageProcessors;
-using ImageProcessing1.ImageProcessors.Exceptions;
+using BasicImageProcessing.ImageProcessingServices;
+using BasicImageProcessing.ImageProcessingServices.Exceptions;
 
-namespace ImageProcessing1
+namespace BasicImageProcessing
 {
     public partial class MainForm : Form
     {

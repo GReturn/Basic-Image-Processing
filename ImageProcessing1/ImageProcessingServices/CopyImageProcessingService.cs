@@ -1,8 +1,8 @@
-﻿using ImageProcessing1.ImageProcessors.Exceptions;
+﻿using BasicImageProcessing.ImageProcessingServices.Exceptions;
 
-namespace ImageProcessing1.ImageProcessors;
+namespace BasicImageProcessing.ImageProcessingServices;
 
-public class CopyImageProcessingService : IImageProcessingService
+internal class CopyImageProcessingService : IImageProcessingService
 {
     public Image ProcessImage(Image image)
     {

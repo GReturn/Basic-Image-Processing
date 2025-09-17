@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing1", "ImageProcessing1\ImageProcessing1.csproj", "{E20795A1-A0B2-47D4-98E5-220E00BB0D09}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic Image Processing", "ImageProcessing1\Basic Image Processing.csproj", "{E20795A1-A0B2-47D4-98E5-220E00BB0D09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,8 @@
-﻿using ImageProcessing1.ImageProcessors.Exceptions;
+﻿using BasicImageProcessing.ImageProcessingServices.Exceptions;
 
-namespace ImageProcessing1.ImageProcessors;
+namespace BasicImageProcessing.ImageProcessingServices;
 
-internal class ColorInversionImageProcessingService : IImageProcessingService
+internal class GreyscaleImageProcessingService : IImageProcessingService
 {
     public Image ProcessImage(Image image)
     {
@@ -18,16 +18,8 @@ internal class ColorInversionImageProcessingService : IImageProcessingService
                 for (int x = 0; x < originalImage.Width; x++)
                 {
                     var pixelColor = originalImage.GetPixel(x, y);
-                    processedImage.SetPixel(
-                        x, 
-                        y, 
-                        Color.FromArgb(
-                            pixelColor.A, 
-                            Math.Clamp(255 - pixelColor.R, 0, 255),
-                            Math.Clamp(255 - pixelColor.G, 0, 255),
-                            Math.Clamp(255 - pixelColor.B, 0, 255)
-                        )
-                    );
+                    var averageColor = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                    processedImage.SetPixel(x, y, Color.FromArgb(averageColor, averageColor, averageColor));
                 }
             }
             return processedImage;
