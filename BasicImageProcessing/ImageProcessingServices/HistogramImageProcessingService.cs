@@ -7,6 +7,7 @@ namespace BasicImageProcessing.ImageProcessingServices;
 internal class HistogramImageProcessingService : IImageProcessingService
 {
     /*
+     * PPT:
      *  The easiest way of doing this is by representing 
      *  an image into a 2D space where x is the degree of 
      *  image intensity and y as the magnitude of the intensity
@@ -47,7 +48,7 @@ internal class HistogramImageProcessingService : IImageProcessingService
             for (int x = 0; x < grayImage.Width; x++)
             {
                 var pixelColor = grayImage.GetPixel(x, y);
-                intensityCounts[pixelColor.R]++;
+                intensityCounts[pixelColor.R]++; // R = G = B in grayscale image
             }
         }
         return intensityCounts;
@@ -59,11 +60,11 @@ internal class HistogramImageProcessingService : IImageProcessingService
         using (Graphics g = Graphics.FromImage(histogramImage))
         {
             g.Clear(Color.White);
-            int maxCount = intensityCounts.Max();
+            int maxCount = intensityCounts.Max(); // normalizer(?) / for normalizing the data, we set the upper bound
             for (int x = 0; x < width; x++)
             {
-                int intensityLevel = (int)((x / (float)width) * 255);
-                int barHeight = (int)((intensityCounts[intensityLevel] / (float)maxCount) * height);
+                int xAxis = (int)((x / (float)width) * 255);
+                int barHeight = (int)((intensityCounts[xAxis] / (float)maxCount) * height);
                 g.DrawLine(Pens.Black, x, height, x, height - barHeight);
             }
         }

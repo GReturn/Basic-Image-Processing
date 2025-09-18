@@ -67,8 +67,8 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addImageToolStripMenuItem, saveProcessedImageToolStripMenuItem, clearImagePlaceholdersToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Size = new Size(61, 20);
+            fileToolStripMenuItem.Text = "Options";
             // 
             // addImageToolStripMenuItem
             // 
