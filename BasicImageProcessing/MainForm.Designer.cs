@@ -33,10 +33,17 @@
             addImageToolStripMenuItem = new ToolStripMenuItem();
             saveProcessedImageToolStripMenuItem = new ToolStripMenuItem();
             clearImagePlaceholdersToolStripMenuItem = new ToolStripMenuItem();
+            advancedImageProcessingToolStripMenuItem = new ToolStripMenuItem();
+            imageSubtractionToolStripMenuItem = new ToolStripMenuItem();
+            realtimeVideoSubtractionToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog = new OpenFileDialog();
             pictureBoxOriginalImage = new PictureBox();
             labelControls = new Label();
             panel1 = new Panel();
+            groupBoxContrast = new GroupBox();
+            trackBarContrast = new TrackBar();
+            groupBoxBrightness = new GroupBox();
+            trackBarBrightness = new TrackBar();
             groupBoxBasicImageProcessing = new GroupBox();
             buttonSepia = new Button();
             buttonHistogram = new Button();
@@ -50,13 +57,17 @@
             menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOriginalImage).BeginInit();
             panel1.SuspendLayout();
+            groupBoxContrast.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarContrast).BeginInit();
+            groupBoxBrightness.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarBrightness).BeginInit();
             groupBoxBasicImageProcessing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxProcessedImage).BeginInit();
             SuspendLayout();
             // 
             // menuStrip
             // 
-            menuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, advancedImageProcessingToolStripMenuItem });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Size = new Size(900, 24);
@@ -91,6 +102,26 @@
             clearImagePlaceholdersToolStripMenuItem.Text = "Clear Image Placeholders";
             clearImagePlaceholdersToolStripMenuItem.Click += clearImagePlaceholdersToolStripMenuItem_Click;
             // 
+            // advancedImageProcessingToolStripMenuItem
+            // 
+            advancedImageProcessingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { imageSubtractionToolStripMenuItem, realtimeVideoSubtractionToolStripMenuItem });
+            advancedImageProcessingToolStripMenuItem.Name = "advancedImageProcessingToolStripMenuItem";
+            advancedImageProcessingToolStripMenuItem.Size = new Size(168, 20);
+            advancedImageProcessingToolStripMenuItem.Text = "Advanced Image Processing";
+            // 
+            // imageSubtractionToolStripMenuItem
+            // 
+            imageSubtractionToolStripMenuItem.Name = "imageSubtractionToolStripMenuItem";
+            imageSubtractionToolStripMenuItem.Size = new Size(222, 22);
+            imageSubtractionToolStripMenuItem.Text = "Image Subtraction";
+            imageSubtractionToolStripMenuItem.Click += imageSubtractionToolStripMenuItem_Click;
+            // 
+            // realtimeVideoSubtractionToolStripMenuItem
+            // 
+            realtimeVideoSubtractionToolStripMenuItem.Name = "realtimeVideoSubtractionToolStripMenuItem";
+            realtimeVideoSubtractionToolStripMenuItem.Size = new Size(222, 22);
+            realtimeVideoSubtractionToolStripMenuItem.Text = "Real-time Video Subtraction";
+            // 
             // openFileDialog
             // 
             openFileDialog.FileName = "openFileDialog1";
@@ -119,6 +150,8 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.Control;
+            panel1.Controls.Add(groupBoxContrast);
+            panel1.Controls.Add(groupBoxBrightness);
             panel1.Controls.Add(groupBoxBasicImageProcessing);
             panel1.Controls.Add(labelControls);
             panel1.Dock = DockStyle.Bottom;
@@ -127,6 +160,46 @@
             panel1.Size = new Size(900, 232);
             panel1.TabIndex = 3;
             // 
+            // groupBoxContrast
+            // 
+            groupBoxContrast.Controls.Add(trackBarContrast);
+            groupBoxContrast.Location = new Point(463, 120);
+            groupBoxContrast.Name = "groupBoxContrast";
+            groupBoxContrast.Size = new Size(300, 82);
+            groupBoxContrast.TabIndex = 7;
+            groupBoxContrast.TabStop = false;
+            groupBoxContrast.Text = "Contrast";
+            // 
+            // trackBarContrast
+            // 
+            trackBarContrast.Location = new Point(6, 22);
+            trackBarContrast.Maximum = 50;
+            trackBarContrast.Minimum = -50;
+            trackBarContrast.Name = "trackBarContrast";
+            trackBarContrast.Size = new Size(288, 45);
+            trackBarContrast.TabIndex = 0;
+            trackBarContrast.Scroll += trackBarContrast_Scroll;
+            // 
+            // groupBoxBrightness
+            // 
+            groupBoxBrightness.Controls.Add(trackBarBrightness);
+            groupBoxBrightness.Location = new Point(463, 26);
+            groupBoxBrightness.Name = "groupBoxBrightness";
+            groupBoxBrightness.Size = new Size(300, 74);
+            groupBoxBrightness.TabIndex = 6;
+            groupBoxBrightness.TabStop = false;
+            groupBoxBrightness.Text = "Brightness";
+            // 
+            // trackBarBrightness
+            // 
+            trackBarBrightness.Location = new Point(6, 22);
+            trackBarBrightness.Maximum = 100;
+            trackBarBrightness.Name = "trackBarBrightness";
+            trackBarBrightness.Size = new Size(288, 45);
+            trackBarBrightness.TabIndex = 5;
+            trackBarBrightness.Value = 100;
+            trackBarBrightness.Scroll += trackBarBrightness_Scroll;
+            // 
             // groupBoxBasicImageProcessing
             // 
             groupBoxBasicImageProcessing.Controls.Add(buttonSepia);
@@ -134,7 +207,7 @@
             groupBoxBasicImageProcessing.Controls.Add(buttonColorInversion);
             groupBoxBasicImageProcessing.Controls.Add(buttonGreyscale);
             groupBoxBasicImageProcessing.Controls.Add(buttonCopyImage);
-            groupBoxBasicImageProcessing.Location = new Point(12, 26);
+            groupBoxBasicImageProcessing.Location = new Point(230, 26);
             groupBoxBasicImageProcessing.Name = "groupBoxBasicImageProcessing";
             groupBoxBasicImageProcessing.Size = new Size(201, 176);
             groupBoxBasicImageProcessing.TabIndex = 4;
@@ -237,6 +310,12 @@
             menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOriginalImage).EndInit();
             panel1.ResumeLayout(false);
+            groupBoxContrast.ResumeLayout(false);
+            groupBoxContrast.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarContrast).EndInit();
+            groupBoxBrightness.ResumeLayout(false);
+            groupBoxBrightness.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarBrightness).EndInit();
             groupBoxBasicImageProcessing.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxProcessedImage).EndInit();
             ResumeLayout(false);
@@ -270,5 +349,12 @@
         private Button buttonColorInversion;
         private SaveFileDialog saveFileDialog;
         private ToolStripMenuItem clearImagePlaceholdersToolStripMenuItem;
+        private GroupBox groupBoxBrightness;
+        private TrackBar trackBarBrightness;
+        private GroupBox groupBoxContrast;
+        private TrackBar trackBarContrast;
+        private ToolStripMenuItem advancedImageProcessingToolStripMenuItem;
+        private ToolStripMenuItem imageSubtractionToolStripMenuItem;
+        private ToolStripMenuItem realtimeVideoSubtractionToolStripMenuItem;
     }
 }

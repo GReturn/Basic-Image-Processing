@@ -1,11 +1,13 @@
 using BasicImageProcessing.ImageProcessingServices;
 using BasicImageProcessing.ImageProcessingServices.Exceptions;
+using BasicImageProcessing.ImageProcessingServices.Interfaces;
 
 namespace BasicImageProcessing
 {
     public partial class MainForm : Form
     {
         IImageProcessingService? _imageProcessingService;
+        IAdjustImageService? _adjustImageService;
 
         public MainForm()
         {
@@ -47,6 +49,8 @@ namespace BasicImageProcessing
             }
 
         }
+
+        #region Control Panel Buttons
 
         private void buttonCopyImage_Click(object sender, EventArgs e)
         {
@@ -153,10 +157,63 @@ namespace BasicImageProcessing
             }
         }
 
+        private void trackBarBrightness_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                _adjustImageService = new AdjustBrightnessImageService();
+                var processedImage = _adjustImageService.Adjust(pictureBoxOriginalImage.Image, trackBarBrightness.Value);
+                pictureBoxProcessedImage.Image = processedImage;
+            }
+            catch (Exception ex)
+            when (ex is NullImageException || ex is ImageProcessingException || ex is not null)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
+        }
+
+        private void trackBarContrast_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                _adjustImageService = new AdjustContrastImageService();
+                var processedImage = _adjustImageService.Adjust(pictureBoxOriginalImage.Image, trackBarContrast.Value);
+                pictureBoxProcessedImage.Image = processedImage;
+            }
+            catch (Exception ex)
+            when (ex is NullImageException || ex is ImageProcessingException || ex is not null)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+        }
+
+        #endregion
+
         private void clearImagePlaceholdersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pictureBoxOriginalImage.Image = null;
             pictureBoxProcessedImage.Image = null;
         }
+
+        private void imageSubtractionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var imageSubtractionForm = new ImageSubtractionForm(this);
+            imageSubtractionForm.Show();
+            Hide();
+        }
+
     }
 }
