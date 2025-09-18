@@ -1,4 +1,4 @@
-﻿namespace BasicImageProcessing.ImageProcessingServices;
+﻿namespace BasicImageProcessing.ImageProcessingServices.Interfaces;
 
 internal interface IImageProcessingService
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
 using BasicImageProcessing.ImageProcessingServices.Exceptions;
+using BasicImageProcessing.ImageProcessingServices.Interfaces;
 
 namespace BasicImageProcessing.ImageProcessingServices;
 
