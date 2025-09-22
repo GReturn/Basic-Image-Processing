@@ -7,15 +7,15 @@ internal class SubtractImageProcessingService
     public Image ProcessImages(Image imageBackground, Image imageSubject)
     {
         if (imageBackground == null || imageSubject == null) throw new NullImageException("One or both input images are empty.");
-        // if (imageBackground.Size != imageSubject.Size) throw new ImageProcessingException("Input images must be of the same dimensions.");
+        if (imageBackground.Size != imageSubject.Size) throw new ImageProcessingException("Input images must be of the same dimensions.");
         
-        Bitmap originalImageBackground = new(imageBackground);
         Bitmap originalImageSubject = new(imageSubject);
+        Bitmap originalImageBackground = new(imageBackground);
         Bitmap processedImage = new(originalImageBackground.Width, originalImageBackground.Height);
         
         Color green = Color.FromArgb(0, 255, 0);
         int greyGreen = (green.R + green.G + green.B) / 3;
-        int threshold = 5;
+        int threshold = 10;
 
         try
         {
@@ -30,11 +30,11 @@ internal class SubtractImageProcessingService
                     int subtractionValue = Math.Abs(averageColorSubject - greyGreen);
                     if (subtractionValue > threshold)
                     {
-                        processedImage.SetPixel(x, y, pixelColorBackground);
+                        processedImage.SetPixel(x, y, pixelColorSubject);
                     }
                     else
                     {
-                        processedImage.SetPixel(x, y, pixelColorSubject);
+                        processedImage.SetPixel(x, y, pixelColorBackground);
                     }
                 }
             }

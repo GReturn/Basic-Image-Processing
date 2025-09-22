@@ -53,23 +53,23 @@ namespace BasicImageProcessing
 
         private void buttonApplySubtraction_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 SubtractImageProcessingService service = new();
                 var processedImage = service.ProcessImages(pictureBoxImageBackground.Image, pictureBoxImageSubject.Image);
                 pictureBoxImageResult.Image = processedImage;
-            //}
-            //catch (Exception ex)
-            //when (ex is NullImageException || ex is ImageProcessingException || ex is not null)
-            //{
-            //    MessageBox.Show(
-            //        ex.Message,
-            //        "Error",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Error
-            //    );
-            //    return;
-            //}
+            }
+            catch (Exception ex)
+            when (ex is NullImageException || ex is ImageProcessingException || ex is not null)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
         }
     }
 }
