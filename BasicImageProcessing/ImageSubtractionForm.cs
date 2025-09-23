@@ -16,9 +16,14 @@ public partial class ImageSubtractionForm : Form
         this.mainForm = mainForm;
     }
 
-    private void goBackToolStripMenuItem_Click(object sender, EventArgs e)
+    private void GoBack()
     {
         mainForm.Show();
+    }
+
+    private void goBackToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        GoBack();
         Close();
     }
 
@@ -98,5 +103,10 @@ public partial class ImageSubtractionForm : Form
             }
             pictureBoxImageResult.Image.Save(saveFileDialog.FileName, format);
         }
+    }
+
+    private void ImageSubtractionForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        GoBack();
     }
 }

@@ -203,6 +203,7 @@
             MainMenuStrip = menuStrip1;
             Name = "ImageSubtractionForm";
             Text = "Image Subtraction";
+            FormClosing += ImageSubtractionForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)pictureBoxImageSubject).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxImageBackground).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxImageResult).EndInit();
