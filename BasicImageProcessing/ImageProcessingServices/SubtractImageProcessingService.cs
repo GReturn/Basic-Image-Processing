@@ -15,26 +15,29 @@ internal class SubtractImageProcessingService
         
         Color green = Color.FromArgb(0, 255, 0);
         int greyGreen = (green.R + green.G + green.B) / 3;
-        int threshold = 10;
+        int threshold = 30;
 
         try
         {
-            for (int y = 0; y < originalImageSubject.Height; y++)
+            for (int x = 0; x < originalImageSubject.Width; x++)
             {
-                for (int x = 0; x < originalImageSubject.Width; x++)
+                for (int y = 0; y < originalImageSubject.Height; y++)
                 {
                     var pixelColorSubject = originalImageSubject.GetPixel(x, y);
                     var pixelColorBackground = originalImageBackground.GetPixel(x, y);
 
                     var averageColorSubject = (pixelColorSubject.R + pixelColorSubject.G + pixelColorSubject.B) / 3;
                     int subtractionValue = Math.Abs(averageColorSubject - greyGreen);
-                    if (subtractionValue > threshold)
+                    if (subtractionValue < threshold 
+                        && pixelColorSubject.G > pixelColorSubject.R 
+                        && pixelColorSubject.G > pixelColorSubject.B
+                    )
                     {
-                        processedImage.SetPixel(x, y, pixelColorSubject);
+                        processedImage.SetPixel(x, y, pixelColorBackground);
                     }
                     else
                     {
-                        processedImage.SetPixel(x, y, pixelColorBackground);
+                        processedImage.SetPixel(x, y, pixelColorSubject);
                     }
                 }
             }
