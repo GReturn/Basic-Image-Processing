@@ -1,4 +1,7 @@
 # BasicImageProcessing
+Basic image processing. 
+
+Download the executable: https://github.com/GReturn/Basic-Image-Processing/releases/download/v0.1.1-alpha/BasicImageProcessing.exe
 
 ## Features
 - Copy Image
