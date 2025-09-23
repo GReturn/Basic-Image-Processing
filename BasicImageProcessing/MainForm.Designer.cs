@@ -33,6 +33,7 @@
             addImageToolStripMenuItem = new ToolStripMenuItem();
             saveProcessedImageToolStripMenuItem = new ToolStripMenuItem();
             clearImagePlaceholdersToolStripMenuItem = new ToolStripMenuItem();
+            captureCameraPhotoToolStripMenuItem = new ToolStripMenuItem();
             advancedImageProcessingToolStripMenuItem = new ToolStripMenuItem();
             imageSubtractionToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog = new OpenFileDialog();
@@ -53,7 +54,6 @@
             labelImageA = new Label();
             labelImageB = new Label();
             saveFileDialog = new SaveFileDialog();
-            captureCameraPhotoToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOriginalImage).BeginInit();
             panel1.SuspendLayout();
@@ -76,7 +76,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addImageToolStripMenuItem, saveProcessedImageToolStripMenuItem, clearImagePlaceholdersToolStripMenuItem, captureCameraPhotoToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addImageToolStripMenuItem, captureCameraPhotoToolStripMenuItem, saveProcessedImageToolStripMenuItem, clearImagePlaceholdersToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(61, 20);
             fileToolStripMenuItem.Text = "Options";
@@ -101,6 +101,13 @@
             clearImagePlaceholdersToolStripMenuItem.Size = new Size(207, 22);
             clearImagePlaceholdersToolStripMenuItem.Text = "Clear Image Placeholders";
             clearImagePlaceholdersToolStripMenuItem.Click += clearImagePlaceholdersToolStripMenuItem_Click;
+            // 
+            // captureCameraPhotoToolStripMenuItem
+            // 
+            captureCameraPhotoToolStripMenuItem.Name = "captureCameraPhotoToolStripMenuItem";
+            captureCameraPhotoToolStripMenuItem.Size = new Size(207, 22);
+            captureCameraPhotoToolStripMenuItem.Text = "Add Image - Use Camera";
+            captureCameraPhotoToolStripMenuItem.Click += captureCameraPhotoToolStripMenuItem_Click;
             // 
             // advancedImageProcessingToolStripMenuItem
             // 
@@ -285,13 +292,6 @@
             labelImageB.Size = new Size(50, 15);
             labelImageB.TabIndex = 6;
             labelImageB.Text = "Image B";
-            // 
-            // captureCameraPhotoToolStripMenuItem
-            // 
-            captureCameraPhotoToolStripMenuItem.Name = "captureCameraPhotoToolStripMenuItem";
-            captureCameraPhotoToolStripMenuItem.Size = new Size(207, 22);
-            captureCameraPhotoToolStripMenuItem.Text = "Capture Camera Photo";
-            captureCameraPhotoToolStripMenuItem.Click += captureCameraPhotoToolStripMenuItem_Click;
             // 
             // MainForm
             // 
