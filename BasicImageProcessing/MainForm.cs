@@ -213,5 +213,11 @@ namespace BasicImageProcessing
             imageSubtractionForm.Show();
             Hide();
         }
+
+        private void captureCameraPhotoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CameraCaptureForm cameraCaptureForm = new CameraCaptureForm(this, ref pictureBoxOriginalImage);
+            cameraCaptureForm.ShowDialog();
+        }
     }
 }

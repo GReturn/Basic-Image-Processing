@@ -53,6 +53,7 @@
             labelImageA = new Label();
             labelImageB = new Label();
             saveFileDialog = new SaveFileDialog();
+            captureCameraPhotoToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOriginalImage).BeginInit();
             panel1.SuspendLayout();
@@ -75,7 +76,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addImageToolStripMenuItem, saveProcessedImageToolStripMenuItem, clearImagePlaceholdersToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addImageToolStripMenuItem, saveProcessedImageToolStripMenuItem, clearImagePlaceholdersToolStripMenuItem, captureCameraPhotoToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(61, 20);
             fileToolStripMenuItem.Text = "Options";
@@ -111,7 +112,7 @@
             // imageSubtractionToolStripMenuItem
             // 
             imageSubtractionToolStripMenuItem.Name = "imageSubtractionToolStripMenuItem";
-            imageSubtractionToolStripMenuItem.Size = new Size(180, 22);
+            imageSubtractionToolStripMenuItem.Size = new Size(171, 22);
             imageSubtractionToolStripMenuItem.Text = "Image Subtraction";
             imageSubtractionToolStripMenuItem.Click += imageSubtractionToolStripMenuItem_Click;
             // 
@@ -285,6 +286,13 @@
             labelImageB.TabIndex = 6;
             labelImageB.Text = "Image B";
             // 
+            // captureCameraPhotoToolStripMenuItem
+            // 
+            captureCameraPhotoToolStripMenuItem.Name = "captureCameraPhotoToolStripMenuItem";
+            captureCameraPhotoToolStripMenuItem.Size = new Size(207, 22);
+            captureCameraPhotoToolStripMenuItem.Text = "Capture Camera Photo";
+            captureCameraPhotoToolStripMenuItem.Click += captureCameraPhotoToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -348,5 +356,6 @@
         private TrackBar trackBarContrast;
         private ToolStripMenuItem advancedImageProcessingToolStripMenuItem;
         private ToolStripMenuItem imageSubtractionToolStripMenuItem;
+        private ToolStripMenuItem captureCameraPhotoToolStripMenuItem;
     }
 }
