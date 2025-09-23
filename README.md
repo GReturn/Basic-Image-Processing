@@ -9,3 +9,6 @@
 - Brightness
 - Contrast
 - Subtraction
+
+## Requirements
+- .NET 8
