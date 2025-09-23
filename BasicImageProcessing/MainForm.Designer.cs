@@ -35,7 +35,6 @@
             clearImagePlaceholdersToolStripMenuItem = new ToolStripMenuItem();
             advancedImageProcessingToolStripMenuItem = new ToolStripMenuItem();
             imageSubtractionToolStripMenuItem = new ToolStripMenuItem();
-            realtimeVideoSubtractionToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog = new OpenFileDialog();
             pictureBoxOriginalImage = new PictureBox();
             labelControls = new Label();
@@ -104,7 +103,7 @@
             // 
             // advancedImageProcessingToolStripMenuItem
             // 
-            advancedImageProcessingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { imageSubtractionToolStripMenuItem, realtimeVideoSubtractionToolStripMenuItem });
+            advancedImageProcessingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { imageSubtractionToolStripMenuItem });
             advancedImageProcessingToolStripMenuItem.Name = "advancedImageProcessingToolStripMenuItem";
             advancedImageProcessingToolStripMenuItem.Size = new Size(168, 20);
             advancedImageProcessingToolStripMenuItem.Text = "Advanced Image Processing";
@@ -112,15 +111,9 @@
             // imageSubtractionToolStripMenuItem
             // 
             imageSubtractionToolStripMenuItem.Name = "imageSubtractionToolStripMenuItem";
-            imageSubtractionToolStripMenuItem.Size = new Size(222, 22);
+            imageSubtractionToolStripMenuItem.Size = new Size(180, 22);
             imageSubtractionToolStripMenuItem.Text = "Image Subtraction";
             imageSubtractionToolStripMenuItem.Click += imageSubtractionToolStripMenuItem_Click;
-            // 
-            // realtimeVideoSubtractionToolStripMenuItem
-            // 
-            realtimeVideoSubtractionToolStripMenuItem.Name = "realtimeVideoSubtractionToolStripMenuItem";
-            realtimeVideoSubtractionToolStripMenuItem.Size = new Size(222, 22);
-            realtimeVideoSubtractionToolStripMenuItem.Text = "Real-time Video Subtraction";
             // 
             // openFileDialog
             // 
@@ -355,6 +348,5 @@
         private TrackBar trackBarContrast;
         private ToolStripMenuItem advancedImageProcessingToolStripMenuItem;
         private ToolStripMenuItem imageSubtractionToolStripMenuItem;
-        private ToolStripMenuItem realtimeVideoSubtractionToolStripMenuItem;
     }
 }

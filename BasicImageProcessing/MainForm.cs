@@ -47,7 +47,6 @@ namespace BasicImageProcessing
                 }
                 pictureBoxProcessedImage.Image.Save(saveFileDialog.FileName, format);
             }
-
         }
 
         #region Control Panel Buttons
@@ -214,6 +213,5 @@ namespace BasicImageProcessing
             imageSubtractionForm.Show();
             Hide();
         }
-
     }
 }

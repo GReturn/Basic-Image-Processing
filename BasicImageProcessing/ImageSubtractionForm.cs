@@ -1,75 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 using BasicImageProcessing.ImageProcessingServices;
 using BasicImageProcessing.ImageProcessingServices.Exceptions;
-using BasicImageProcessing.ImageProcessingServices.Interfaces;
 
-namespace BasicImageProcessing
+using WebCamLib;
+
+namespace BasicImageProcessing;
+
+public partial class ImageSubtractionForm : Form
 {
-    public partial class ImageSubtractionForm : Form
+    private MainForm mainForm;
+    public ImageSubtractionForm(MainForm mainForm)
     {
-        private MainForm mainForm;
-        public ImageSubtractionForm(MainForm mainForm)
-        {
-            InitializeComponent();
-            this.mainForm = mainForm;
-        }
+        InitializeComponent();
+        this.mainForm = mainForm;
+    }
 
-        private void goBackToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mainForm.Show();
-            Close();
-        }
+    private void goBackToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        mainForm.Show();
+        Close();
+    }
 
-        private void buttonLoadImage_Click(object sender, EventArgs e)
+    private void buttonLoadImage_Click(object sender, EventArgs e)
+    {
+        openFileDialog.Title = "Select an image file";
+        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
-            openFileDialog.Title = "Select an image file";
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var image = Image.FromFile(openFileDialog.FileName);
-                pictureBoxImageSubject.Image = image;
-            }
+            var image = Image.FromFile(openFileDialog.FileName);
+            pictureBoxImageSubject.Image = image;
+            labelImage1.Text = $"Image 1: {image.Width}x{image.Height}px";
         }
+    }
 
-        private void buttonLoadBackground_Click(object sender, EventArgs e)
+    private void buttonLoadBackground_Click(object sender, EventArgs e)
+    {
+        openFileDialog.Title = "Select an image file";
+        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
-            openFileDialog.Title = "Select an image file";
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var image = Image.FromFile(openFileDialog.FileName);
-                pictureBoxImageBackground.Image = image;
-            }
+            var image = Image.FromFile(openFileDialog.FileName);
+            pictureBoxImageBackground.Image = image;
+            labelImage2.Text = $"Image 2: {image.Width}x{image.Height}px";
         }
+    }
 
-        private void buttonApplySubtraction_Click(object sender, EventArgs e)
+    private void buttonApplySubtraction_Click(object sender, EventArgs e)
+    {
+        try
         {
-            try
+            SubtractImageProcessingService service = new();
+            var processedImage = service.ProcessImages(pictureBoxImageBackground.Image, pictureBoxImageSubject.Image);
+            pictureBoxImageResult.Image = processedImage;
+            labelImage3.Text = $"Result Image: {processedImage.Width}x{processedImage.Height}px";
+        }
+        catch (Exception ex)
+        when (ex is NullImageException || ex is ImageProcessingException || ex is not null)
+        {
+            MessageBox.Show(
+                ex.Message,
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+            return;
+        }
+    }
+
+    private void buttonUseCamera_Click(object sender, EventArgs e)
+    {
+        CameraCaptureForm cameraCaptureForm = new CameraCaptureForm(this, ref pictureBoxImageSubject);
+        cameraCaptureForm.ShowDialog();
+        labelImage1.Text = $"Image 1: {pictureBoxImageSubject.Image?.Width ?? 0}x{pictureBoxImageSubject.Image?.Height ?? 0}px";
+    }
+
+
+    private void saveProcessedImageToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (pictureBoxImageResult.Image == null)
+        {
+            MessageBox.Show("No processed image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        saveFileDialog.Title = "Save Processed Image";
+        saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg;*.jpeg|All Files|*.*";
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            var format = System.Drawing.Imaging.ImageFormat.Png;
+            switch (Path.GetExtension(saveFileDialog.FileName).ToLower())
             {
-                SubtractImageProcessingService service = new();
-                var processedImage = service.ProcessImages(pictureBoxImageBackground.Image, pictureBoxImageSubject.Image);
-                pictureBoxImageResult.Image = processedImage;
+                case ".jpg":
+                case ".jpeg":
+                case ".png":
+                    format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                    break;
             }
-            catch (Exception ex)
-            when (ex is NullImageException || ex is ImageProcessingException || ex is not null)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-                return;
-            }
+            pictureBoxImageResult.Image.Save(saveFileDialog.FileName, format);
         }
     }
 }
