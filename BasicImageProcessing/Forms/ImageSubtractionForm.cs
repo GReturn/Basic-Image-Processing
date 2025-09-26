@@ -1,9 +1,5 @@
-﻿using System.Windows.Forms;
-
-using BasicImageProcessing.ImageProcessingServices;
+﻿using BasicImageProcessing.ImageProcessingServices;
 using BasicImageProcessing.ImageProcessingServices.Exceptions;
-
-using WebCamLib;
 
 namespace BasicImageProcessing;
 
@@ -83,25 +79,39 @@ public partial class ImageSubtractionForm : Form
 
     private void saveProcessedImageToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        if (pictureBoxImageResult.Image == null)
+        try 
         {
-            MessageBox.Show("No processed image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-        }
-        saveFileDialog.Title = "Save Processed Image";
-        saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg;*.jpeg|All Files|*.*";
-        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-        {
-            var format = System.Drawing.Imaging.ImageFormat.Png;
-            switch (Path.GetExtension(saveFileDialog.FileName).ToLower())
+            if (pictureBoxImageResult.Image == null)
             {
-                case ".jpg":
-                case ".jpeg":
-                case ".png":
-                    format = System.Drawing.Imaging.ImageFormat.Jpeg;
-                    break;
+                MessageBox.Show("No processed image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            pictureBoxImageResult.Image.Save(saveFileDialog.FileName, format);
+            saveFileDialog.Title = "Save Processed Image";
+            saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg;*.jpeg|All Files|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var format = System.Drawing.Imaging.ImageFormat.Png;
+                switch (Path.GetExtension(saveFileDialog.FileName).ToLower())
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                    case ".png":
+                        format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                        break;
+                }
+                pictureBoxImageResult.Image.Save(saveFileDialog.FileName, format);
+            }
+        }
+        catch (Exception ex)
+        when(ex is NullImageException || ex is ImageProcessingException || ex is not null)
+        {
+            MessageBox.Show(
+                ex.Message,
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+            return;
         }
     }
 

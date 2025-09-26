@@ -1,6 +1,4 @@
-﻿using BasicImageProcessing.ImageProcessingServices;
-
-using WebCamLib;
+﻿using BasicImageProcessing.Utils;
 
 namespace BasicImageProcessing;
 
