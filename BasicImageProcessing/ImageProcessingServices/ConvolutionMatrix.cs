@@ -160,5 +160,43 @@ internal class ConvolutionMatrix
         return Convolution3x3(bitmap, matrix);
     }
 
+    public static bool Sharpen(Bitmap bitmap, int weight = 11)
+    {
+        ConvolutionMatrix matrix = new(0)
+        {
+            Pixel = weight,
+            TopMiddle =  -2,
+            MiddleLeft = -2,
+            MiddleRight = -2,
+            BottomMiddle = -2,
+            Factor = weight - 8
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool MeanRemoval(Bitmap bitmap, int weight = 9)
+    {
+        ConvolutionMatrix matrix = new(-1)
+        {
+            Pixel = weight,
+            Factor = weight - 8
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool EmbossLaplacian(Bitmap bitmap, int weight = 4)
+    {
+        ConvolutionMatrix matrix = new(-1)
+        {
+            Pixel = weight,
+            TopMiddle = 0,
+            MiddleLeft = 0,
+            MiddleRight = 0,
+            BottomMiddle = 0,
+            Factor = 1,
+            Offset = 127
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
 
 }
