@@ -21,6 +21,16 @@ internal class ConvolutionMatrix
     public int Factor { get; set; } = 1;
     public int Offset { get; set; } = 0;
 
+    public ConvolutionMatrix() {}
+
+    public ConvolutionMatrix(int val)
+    {
+        TopLeft = TopMiddle = TopRight =
+        MiddleLeft = Pixel = MiddleRight =
+        BottomLeft = BottomMiddle = BottomRight =
+        val;
+    }
+
     public void SetAll(int val)
     {
         TopLeft = TopMiddle = TopRight = 
