@@ -137,4 +137,28 @@ internal class ConvolutionMatrix
     }
 
 
+    public static bool Smooth(Bitmap bitmap, int weight = 1)
+    {
+        ConvolutionMatrix matrix = new(1)
+        {
+            Pixel = weight,
+            Factor = weight + 8
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool GaussianBlur(Bitmap bitmap, int weight = 4) {
+        ConvolutionMatrix matrix = new(1)
+        {
+            Pixel = weight,
+            TopMiddle = 2,
+            MiddleLeft = 2,
+            MiddleRight = 2,
+            BottomMiddle = 2,
+            Factor = weight + 12
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+
 }
