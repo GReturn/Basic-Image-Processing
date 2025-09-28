@@ -1,7 +1,5 @@
 ﻿using System.Drawing.Imaging;
 
-using Emgu.CV;
-
 namespace BasicImageProcessing.ImageProcessingServices;
 
 internal class ConvolutionMatrix
