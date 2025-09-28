@@ -199,4 +199,69 @@ internal class ConvolutionMatrix
         return Convolution3x3(bitmap, matrix);
     }
 
+    public static bool EmbossLaplacianHorizontalVertical(Bitmap bitmap, int weight = 4)
+    {
+        ConvolutionMatrix matrix = new(0)
+        {
+            Pixel = weight,
+            TopMiddle = -1,
+            MiddleLeft = -1,
+            MiddleRight = -1,
+            BottomMiddle = -1,
+            Factor = 1,
+            Offset = 127
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool EmbossLaplacianAllDirections(Bitmap bitmap, int weight = 8)
+    {
+        ConvolutionMatrix matrix = new(-1)
+        {
+            Pixel = weight,
+            Factor = 1,
+            Offset = 127
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool EmbossLaplacianLossy(Bitmap bitmap, int weight = 4)
+    {
+        ConvolutionMatrix matrix = new(-2)
+        {
+            Pixel = weight,
+            TopLeft = 1,
+            TopRight = 1,
+            BottomMiddle = 1,
+            Factor = 1,
+            Offset = 127
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool EmbossLaplacianHorizontalOnly(Bitmap bitmap, int weight = 2)
+    {
+        ConvolutionMatrix matrix = new(0)
+        {
+            Pixel = weight,
+            MiddleLeft = -1,
+            MiddleRight = -1,
+            Factor = 1,
+            Offset = 127
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
+
+    public static bool EmbossLaplacianVerticalOnly(Bitmap bitmap, int weight = 0)
+    {
+        ConvolutionMatrix matrix = new(0)
+        {
+            Pixel = weight,
+            TopMiddle = -1,
+            BottomMiddle = 1,
+            Factor = 1,
+            Offset = 127
+        };
+        return Convolution3x3(bitmap, matrix);
+    }
 }
