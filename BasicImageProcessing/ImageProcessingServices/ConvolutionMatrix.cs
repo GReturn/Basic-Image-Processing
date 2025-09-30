@@ -1,5 +1,7 @@
 ﻿using System.Drawing.Imaging;
 
+using BasicImageProcessing.ImageProcessingServices.Exceptions;
+
 namespace BasicImageProcessing.ImageProcessingServices;
 
 internal class ConvolutionMatrix
@@ -40,7 +42,7 @@ internal class ConvolutionMatrix
     public static bool Convolution3x3(Bitmap bitmap, ConvolutionMatrix matrix)
     {
         // Avoid divide by zero errors
-        if (0 == matrix.Factor) return false;
+        if (0 == matrix.Factor) throw new ImageProcessingException($"Weight cannot be {matrix.Pixel}!");
 
         Bitmap bitmapCopy = (Bitmap)bitmap.Clone();
 
